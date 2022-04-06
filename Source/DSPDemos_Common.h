@@ -436,6 +436,15 @@ public:
         return false;
     }
 
+    void restartDevice()
+    {
+        auto setup = audioDeviceManager.getAudioDeviceSetup();
+        setup.bufferSize *= 2;
+        audioDeviceManager.setAudioDeviceSetup (setup, false);
+        setup.bufferSize /= 2;
+        audioDeviceManager.setAudioDeviceSetup (setup, false);
+    }
+
     void togglePlay()
     {
         if (playState.getValue())

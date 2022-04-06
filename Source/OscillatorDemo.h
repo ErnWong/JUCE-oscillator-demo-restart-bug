@@ -138,14 +138,21 @@ struct OscillatorDemo    : public Component
 {
     OscillatorDemo()
     {
-        addAndMakeVisible (fileReaderComponent);
-        setSize (750, 500);
+        //addAndMakeVisible (fileReaderComponent);
+        addAndMakeVisible (restartButton);
+        restartButton.onClick = [this]()
+        {
+            fileReaderComponent.restartDevice();
+        };
+        setSize (150, 200);
     }
 
     void resized() override
     {
-        fileReaderComponent.setBounds (getLocalBounds());
+        restartButton.setBounds (getLocalBounds());
+        //fileReaderComponent.setBounds (getLocalBounds());
     }
 
     AudioFileReaderComponent<OscillatorDemoDSP> fileReaderComponent;
+    TextButton restartButton { "Restart Device" };
 };
